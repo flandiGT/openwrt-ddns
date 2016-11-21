@@ -1,0 +1,11 @@
+---
+- name: set ddns-services
+  include: set_ddns_service.yml
+  vars:
+    name: "{{item.name}}"
+    domain: "{{item.domain}}"
+    username: "{{item.username}}"
+    password: "{{item.password}}"
+    interface: "{{item.interface | default('wan')}}"
+    enabled: "{{item.enabled | default(True)}}"
+  with_items: "{{ddns_services}}"
