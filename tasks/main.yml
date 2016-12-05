@@ -1,4 +1,11 @@
 ---
+- name: install ddns package
+  opkg: name=ddns-scripts state=present update_cache=yes
+
+- name: install ddns package
+  opkg: name={{item}} state=present update_cache=yes
+  with_items: "{{packages}}"
+
 - name: set ddns-services
   include: set_ddns_service.yml
   vars:

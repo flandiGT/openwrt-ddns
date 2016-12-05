@@ -7,9 +7,10 @@ compare: [http://wiki.openwrt.org/doc/uci/ddns]
 Role Variables
 --------------
 
-| variable name     | type             | element structure    | default |
-|-------------------|------------------|----------------------|---------|
-| ddns_services     | array of objects | see attributes below | <empty> |
+| variable name     | type             | description/structure                                | default |
+|-------------------|------------------|------------------------------------------------------|---------|
+| ddns_services     | array of objects | see attributes below                                 | <empty> |
+| packages          | array of texts   | packages to install (like: 'ddns-scripts_no-ip_com') | <empty> |
 
 Role Variable elements
 ----------------------
