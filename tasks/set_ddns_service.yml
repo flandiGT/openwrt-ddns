@@ -70,3 +70,29 @@
   notify:
     - uci commit ddns
     - reload ddns-scripts for openwrt-ddns
+
+- name: set ddns_service ip_source
+  uci:
+    command: set
+    config: "ddns"
+    section: "{{name}}"
+    option: "ip_source"
+    type: "service"
+    value: "{{ip_source}}"
+  when: ip_source != {}
+  notify:
+    - uci commit ddns
+    - reload ddns-scripts for openwrt-ddns
+
+- name: set ddns_service ip_url
+  uci:
+    command: set
+    config: "ddns"
+    section: "{{name}}"
+    option: "ip_url"
+    type: "service"
+    value: "{{ip_url}}"
+  when: ip_url != {}
+  notify:
+    - uci commit ddns
+    - reload ddns-scripts for openwrt-ddns
