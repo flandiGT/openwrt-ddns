@@ -7,14 +7,21 @@
   with_items: "{{packages}}"
 
 - name: set ddns-services
-  include: set_ddns_service.yml
-  vars:
-    name: "{{item.name}}"
-    domain: "{{item.domain}}"
-    username: "{{item.username}}"
-    password: "{{item.password}}"
-    interface: "{{item.interface | default('wan')}}"
-    enabled: "{{item.enabled | default(True)}}"
-    ip_source: "{{item.ip_source | default({})}}"
-    ip_url: "{{item.ip_url | default({})}}"
+  uci:
+    command: set_object
+    config: ddns
+    type: service
+    section: "{{item.name}}"
+    values:
+      service_name: "{{item.name}}"
+      domain: "{{item.domain}}"
+      username: "{{item.username}}"
+      password: "{{item.password}}"
+      interface: "{{item.interface | default('wan')}}"
+      enabled: "{{item.enabled | default(True) | int}}"
+      ip_source: "{{item.ip_source | default({})}}"
+      ip_url: "{{item.ip_url | default({})}}"
   with_items: "{{ddns_services}}"
+  notify:
+    - uci commit ddns
+    - reload ddns-scripts for openwrt-ddns
