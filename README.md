@@ -4,13 +4,19 @@ openwrt-ddns
 configure ddns aspects of your openwrt system.
 compare: [http://wiki.openwrt.org/doc/uci/ddns]
 
+Dependencies
+------------
+
+* [openwrt-uci](https://github.com/flandiGT/openwrt-uci)
+* python installed (if any package is being to installed)
+
 Role Variables
 --------------
 
 | variable name     | type             | description/structure                                | default |
 |-------------------|------------------|------------------------------------------------------|---------|
-| ddns_services     | array of objects | see attributes below                                 | <empty> |
-| packages          | array of texts   | packages to install (like: 'ddns-scripts_no-ip_com') | <empty> |
+| ddns_services     | array of objects | see attributes below                                 | []      |
+| packages          | array of texts   | packages to install (like: 'ddns-scripts_no-ip_com') | []      |
 
 Role Variable elements
 ----------------------
@@ -27,26 +33,22 @@ ddns_services attributes:
 | interface      | text                | no         | interface on your router (default: 'wan')                                   |
 | enabled        | boolean             | no         | enable or disable this service (default: True)                              |
 
-Dependencies
-------------
-
-* openwrt-uci
-
 Example Playbook
 ----------------
 
 ```  
-    - role: openwrt-ddns
-      ddns_services: [{
-        name: "myddns",
-        service_name: "ddnsprovider.com",
-        domain: 'host.yourdomain.net',
-        username: 'your_user_name',
-        password: 'p@ssw0rd',
-        interface: 'wan',
-        enabled: True
-      }]
+ - role: openwrt-ddns
+   packages: ['ddns-scripts_no-ip_com']
+   ddns_services:
+     - name: myddns
+       service_name: "ddnsprovider.com"
+       domain: "host.yourdomain.net"
+       username: "your_user_name"
+       password: "p@ssw0rd"
+       interface: wan
+       enabled: True
 ```
 
-[http://wiki.openwrt.org/doc/uci/ddns]: http://wiki.openwrt.org/doc/uci/ddns
-[https://wiki.openwrt.org/doc/howto/ddns.client]: https://wiki.openwrt.org/doc/howto/ddns.client
+Official documentation:
+* [OpenWRT Wiki / Dynamic DNS Client configuration](http://wiki.openwrt.org/doc/uci/ddns)
+* [OpenWRT Wiki / DDNS Client](https://wiki.openwrt.org/doc/howto/ddns.client)
