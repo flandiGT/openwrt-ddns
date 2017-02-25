@@ -2,5 +2,5 @@
 - name: uci commit ddns
   uci: command=commit config=ddns
 
-- name: reload ddns-scripts for openwrt-ddns
+- name: reload ddns
   raw: /etc/init.d/ddns reload
