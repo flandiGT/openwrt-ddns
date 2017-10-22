@@ -1,5 +1,5 @@
 ---
-- name: install ddns package
+- name: install ddns-scripts package
   opkg: name=ddns-scripts state=present update_cache=yes
 
 - name: install ddns package
@@ -13,7 +13,7 @@
     type: service
     section: "{{ item.name }}"
     values:
-      service_name: "{{ item.name }}"
+      service_name: "{{ item.service_name }}"
       domain: "{{ item.domain }}"
       username: "{{ item.username }}"
       password: "{{ item.password }}"
