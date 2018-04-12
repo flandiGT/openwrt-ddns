@@ -19,6 +19,7 @@
       password: "{{ item.password }}"
       interface: "{{ item.interface | default('wan') }}"
       enabled: "{{ item.enabled | default(True) | int }}"
+      update_url: "{{ item.update_url | default(None) }}"
       ip_source: "{{ item.ip_source | default(None) }}"
       ip_url: "{{ item.ip_url | default(None) }}"
   with_items: "{{ ddns_services }}"

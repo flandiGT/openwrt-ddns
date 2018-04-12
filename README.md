@@ -32,6 +32,7 @@ ddns_services attributes:
 | password       | text                | yes        | your password                                                               |
 | interface      | text                | no         | interface on your router (default: 'wan')                                   |
 | enabled        | boolean             | no         | enable or disable this service (default: True)                              |
+| update_url     | text                | no         | the update url used with placeholders to update the ip (consider documentation of your provider) |
 
 Example Playbook
 ----------------
